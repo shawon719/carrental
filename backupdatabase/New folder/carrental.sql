@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jan 28, 2025 at 08:17 AM
+-- Generation Time: Jan 13, 2025 at 08:59 AM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -18,7 +18,7 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `carrental`
+-- Database: `carrentall`
 --
 
 -- --------------------------------------------------------
@@ -30,40 +30,16 @@ SET time_zone = "+00:00";
 CREATE TABLE `admin` (
   `id` int(11) NOT NULL,
   `UserName` varchar(100) NOT NULL,
-  `role` varchar(100) NOT NULL,
-  `password` varchar(20) NOT NULL
+  `Password` varchar(100) NOT NULL,
+  `updationDate` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00' ON UPDATE current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
 
 --
 -- Dumping data for table `admin`
 --
 
-INSERT INTO `admin` (`id`, `UserName`, `role`, `password`) VALUES
-(1, 'admin', 'admin', 'Test@12345');
-
--- --------------------------------------------------------
-
---
--- Table structure for table `driver`
---
-
-CREATE TABLE `driver` (
-  `driver_id` int(15) NOT NULL,
-  `UserName` varchar(255) NOT NULL,
-  `role` varchar(15) NOT NULL,
-  `password` text NOT NULL,
-  `email` varchar(100) NOT NULL,
-  `phone` varchar(15) NOT NULL,
-  `license_number` varchar(50) NOT NULL,
-  `profile_picture` varchar(255) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- Dumping data for table `driver`
---
-
-INSERT INTO `driver` (`driver_id`, `UserName`, `role`, `password`, `email`, `phone`, `license_number`, `profile_picture`) VALUES
-(1, 'moti', 'driver', 'driver123', 'moti@gmail.com', '0175', '12', '');
+INSERT INTO `admin` (`id`, `UserName`, `Password`, `updationDate`) VALUES
+(1, 'admin', '5c428d8875d2948607f3e3fe134d71b4', '2024-05-01 12:22:38');
 
 -- --------------------------------------------------------
 
@@ -89,8 +65,9 @@ CREATE TABLE `tblbooking` (
 --
 
 INSERT INTO `tblbooking` (`id`, `BookingNumber`, `userEmail`, `VehicleId`, `FromDate`, `ToDate`, `message`, `Status`, `PostingDate`, `LastUpdationDate`) VALUES
-(2, 989124887, 'ruku@gmail.com', 3, '2025-01-28', '2025-01-30', 'fgdfg', 1, '2025-01-27 04:13:28', '2025-01-28 02:55:31'),
-(3, 826794815, 'ruku@gmail.com', 2, '2025-01-30', '2025-02-02', 'hh', 0, '2025-01-28 02:56:41', NULL);
+(1, 443108139, 'amikt12@gmail.com', 2, '2024-06-08', '2024-06-10', 'I want booking', 2, '2024-06-05 05:32:39', '2025-01-13 05:14:09'),
+(2, 234717656, 's.sawon2001@gmail.com', 9, '2025-01-13', '2025-01-14', 'i want this car ', 1, '2025-01-13 05:13:43', '2025-01-13 05:14:04'),
+(3, 607379101, 'ruku@gmail.com', 6, '2025-01-18', '2025-01-31', 'book this car', 2, '2025-01-13 05:35:52', '2025-01-13 05:37:15');
 
 -- --------------------------------------------------------
 
@@ -115,7 +92,9 @@ INSERT INTO `tblbrands` (`id`, `BrandName`, `CreationDate`, `UpdationDate`) VALU
 (3, 'Audi', '2024-05-01 16:24:34', '2024-06-05 05:26:34'),
 (4, 'Nissan', '2024-05-01 16:24:34', '2024-06-05 05:26:34'),
 (5, 'Toyota', '2024-05-01 16:24:34', '2024-06-05 05:26:34'),
-(7, 'Volkswagon', '2024-05-01 16:24:34', '2024-06-05 05:26:34');
+(7, 'Volkswagon', '2024-05-01 16:24:34', '2024-06-05 05:26:34'),
+(8, 'toto', '2025-01-13 05:02:26', NULL),
+(9, 'Rolls Royece', '2025-01-13 05:47:56', NULL);
 
 -- --------------------------------------------------------
 
@@ -135,7 +114,7 @@ CREATE TABLE `tblcontactusinfo` (
 --
 
 INSERT INTO `tblcontactusinfo` (`id`, `Address`, `EmailId`, `ContactNo`) VALUES
-(1, 'mirpur,dhaka', 'info@gmail.com', '8974561236');
+(1, '60 feet', 'info@gmail.com', '8974561236');
 
 -- --------------------------------------------------------
 
@@ -152,6 +131,13 @@ CREATE TABLE `tblcontactusquery` (
   `PostingDate` timestamp NOT NULL DEFAULT current_timestamp(),
   `status` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
+
+--
+-- Dumping data for table `tblcontactusquery`
+--
+
+INSERT INTO `tblcontactusquery` (`id`, `name`, `EmailId`, `ContactNumber`, `Message`, `PostingDate`, `status`) VALUES
+(1, 'rula', 'ruka@gmail.com', '779798', 'I want to know you brach in lakshmipur?', '2025-01-13 09:34:51', 1);
 
 -- --------------------------------------------------------
 
@@ -188,6 +174,14 @@ CREATE TABLE `tblsubscribers` (
   `PostingDate` timestamp NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
 
+--
+-- Dumping data for table `tblsubscribers`
+--
+
+INSERT INTO `tblsubscribers` (`id`, `SubscriberEmail`, `PostingDate`) VALUES
+(4, 'shawaon@gmail.com', '2025-01-03 09:26:21'),
+(6, 'rinjin@gmail.com', '2025-01-13 07:00:12');
+
 -- --------------------------------------------------------
 
 --
@@ -201,6 +195,13 @@ CREATE TABLE `tbltestimonial` (
   `PostingDate` timestamp NOT NULL DEFAULT current_timestamp(),
   `status` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
+
+--
+-- Dumping data for table `tbltestimonial`
+--
+
+INSERT INTO `tbltestimonial` (`id`, `UserEmail`, `Testimonial`, `PostingDate`, `status`) VALUES
+(1, 's.sawon2001@gmail.com', 'your service is quite good but you need to improve it .', '2025-01-13 04:58:52', 1);
 
 -- --------------------------------------------------------
 
@@ -227,8 +228,9 @@ CREATE TABLE `tblusers` (
 --
 
 INSERT INTO `tblusers` (`id`, `FullName`, `EmailId`, `Password`, `ContactNo`, `dob`, `Address`, `City`, `Country`, `RegDate`, `UpdationDate`) VALUES
-(1, 'Test', 'test@gmail.com', 'f925916e2754e5e03f75dd58a5733251', '6465465465', '', '60 feet', 'Mirpur', 'Dhaka', '2025-05-06 14:00:49', '2025-06-08 05:27:37'),
-(3, 'shawon', 'ruku@gmail.com', '202cb962ac59075b964b07152d234b70', '0175210071', NULL, NULL, NULL, NULL, '2025-01-25 05:23:28', NULL);
+(1, 'Test', 'test@gmail.com', 'f925916e2754e5e03f75dd58a5733251', '6465465465', '', 'mirpur', 'dhaka', 'Bangladesh', '2024-12-26 14:00:49', '2024-12-28 05:27:37'),
+(3, 'sharmony', 's.sawon2001@gmail.com', 'f5ff2e5b2131285bbdf494115cfda502', '7867', '17/03/2001', '60 feet', 'Dhaka', 'Bangladesh', '2025-01-13 04:55:27', '2025-01-13 04:56:42'),
+(4, 'ruku', 'ruku@gmail.com', 'f5ff2e5b2131285bbdf494115cfda502', '642654', NULL, NULL, NULL, NULL, '2025-01-13 05:34:35', NULL);
 
 -- --------------------------------------------------------
 
@@ -271,13 +273,15 @@ CREATE TABLE `tblvehicles` (
 --
 
 INSERT INTO `tblvehicles` (`id`, `VehiclesTitle`, `VehiclesBrand`, `VehiclesOverview`, `PricePerDay`, `FuelType`, `ModelYear`, `SeatingCapacity`, `Vimage1`, `Vimage2`, `Vimage3`, `Vimage4`, `Vimage5`, `AirConditioner`, `PowerDoorLocks`, `AntiLockBrakingSystem`, `BrakeAssist`, `PowerSteering`, `DriverAirbag`, `PassengerAirbag`, `PowerWindows`, `CDPlayer`, `CentralLocking`, `CrashSensor`, `LeatherSeats`, `RegDate`, `UpdationDate`) VALUES
-(2, 'BMW 5 Series', 2, 'BMW 5 Series price starts at ? 55.4 Lakh and goes upto ? 68.39 Lakh. The price of Petrol version for 5 Series ranges between ? 55.4 Lakh - ? 60.89 Lakh and the price of Diesel version for 5 Series ranges between ? 60.89 Lakh - ? 68.39 Lakh.', 1000, 'Petrol', 2018, 5, 'BMW-5-Series-Exterior-102005.jpg', 'BMW-5-Series-New-Exterior-89729.jpg', 'BMW-5-Series-Exterior-102006.jpg', 'BMW-5-Series-Interior-102021.jpg', 'BMW-5-Series-Interior-102022.jpg', 1, 1, 1, 1, 1, 1, 1, 1, NULL, 1, 1, 1, '2024-05-10 07:04:35', '2024-06-05 05:30:33'),
+(1, 'Maruti Suzuki Wagon R', 1, 'Maruti Wagon R Latest Updates\r\n\r\nMaruti Suzuki has launched the BS6 Wagon R S-CNG in India. The LXI CNG and LXI (O) CNG variants now cost Rs 5.25 lakh and Rs 5.32 lakh respectively, up by Rs 19,000. Maruti claims a fuel economy of 32.52km per kg. The CNG Wagon R’s continuation in the BS6 era is part of the carmaker’s ‘Mission Green Million’ initiative announced at Auto Expo 2020.\r\n', 5000, 'Petrol', 2019, 5, 'rear-3-4-left-589823254_930x620.jpg', 'tail-lamp-1666712219_930x620.jpg', 'rear-3-4-right-520328200_930x620.jpg', 'steering-close-up-1288209207_930x620.jpg', 'boot-with-standard-luggage-202327489_930x620.jpg', 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, '2024-05-10 07:04:35', '2025-01-13 05:47:26'),
 (3, 'Audi Q8', 3, 'As per ARAI, the mileage of Q8 is 0 kmpl. Real mileage of the vehicle varies depending upon the driving habits. City and highway mileage figures also vary depending upon the road conditions.', 3000, 'Petrol', 2017, 5, 'audi-q8-front-view4.jpg', '1920x1080_MTC_XL_framed_Audi-Odessa-Armaturen_Spiegelung_CC_v05.jpg', 'audi1.jpg', '1audiq8.jpg', 'audi-q8-front-view4.jpeg', 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, '2024-05-10 07:04:35', '2024-06-05 05:30:33'),
 (4, 'Nissan Kicks', 4, 'Latest Update: Nissan has launched the Kicks 2020 with a new turbocharged petrol engine. You can read more about it here.\r\n\r\nNissan Kicks Price and Variants: The Kicks is available in four variants: XL, XV, XV Premium, and XV Premium(O).', 800, 'Petrol', 2020, 5, 'front-left-side-47.jpg', 'kicksmodelimage.jpg', 'download.jpg', 'kicksmodelimage.jpg', '', 1, NULL, NULL, 1, NULL, NULL, 1, 1, NULL, NULL, NULL, 1, '2024-05-10 07:04:35', '2024-06-05 05:30:33'),
 (5, 'Nissan GT-R', 4, ' The GT-R packs a 3.8-litre V6 twin-turbocharged petrol, which puts out 570PS of max power at 6800rpm and 637Nm of peak torque. The engine is mated to a 6-speed dual-clutch transmission in an all-wheel-drive setup. The 2+2 seater GT-R sprints from 0-100kmph in less than 3', 2000, 'Petrol', 2019, 5, 'Nissan-GTR-Right-Front-Three-Quarter-84895.jpg', 'Best-Nissan-Cars-in-India-New-and-Used-1.jpg', '2bb3bc938e734f462e45ed83be05165d.jpg', '2020-nissan-gtr-rakuda-tan-semi-aniline-leather-interior.jpg', 'images.jpg', 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, '2024-05-10 07:04:35', '2024-06-05 05:30:33'),
 (6, 'Nissan Sunny 2020', 4, 'Value for money product and it was so good It is more spacious than other sedans It looks like a luxurious car.', 400, 'CNG', 2018, 5, 'Nissan-Sunny-Right-Front-Three-Quarter-48975_ol.jpg', 'images (1).jpg', 'Nissan-Sunny-Interior-114977.jpg', 'nissan-sunny-8a29f53-500x375.jpg', 'new-nissan-sunny-photo.jpg', 1, 1, NULL, 1, 1, 1, 1, 1, 1, 1, 1, 1, '2024-05-10 07:04:35', '2024-06-05 05:30:33'),
 (7, 'Toyota Fortuner', 5, 'Toyota Fortuner Features: It is a premium seven-seater SUV loaded with features such as LED projector headlamps with LED DRLs, LED fog lamp, and power-adjustable and foldable ORVMs. Inside, the Fortuner offers features such as power-adjustable driver seat, automatic climate control, push-button stop/start, and cruise control.\r\n\r\nToyota Fortuner Safety Features: The Toyota Fortuner gets seven airbags, hill assist control, vehicle stability control with brake assist, and ABS with EBD.', 3000, 'Petrol', 2020, 5, '2015_Toyota_Fortuner_(New_Zealand).jpg', 'toyota-fortuner-legender-rear-quarters-6e57.jpg', 'zw-toyota-fortuner-2020-2.jpg', 'download (1).jpg', '', NULL, NULL, NULL, NULL, NULL, 1, NULL, 1, NULL, 1, 1, 1, '2024-05-10 07:04:35', '2024-06-05 05:30:33'),
-(8, 'Maruti Suzuki Vitara Brezza', 1, 'The new Vitara Brezza is a well-rounded package that is feature-loaded and offers good drivability. And it is backed by Maruti’s vast service network, which ensures a peace of mind to customers. The petrol motor could have been more refined and offered more pep.', 600, 'Petrol', 2018, 5, 'marutisuzuki-vitara-brezza-right-front-three-quarter3.jpg', 'marutisuzuki-vitara-brezza-rear-view37.jpg', 'marutisuzuki-vitara-brezza-dashboard10.jpg', 'marutisuzuki-vitara-brezza-boot-space59.jpg', 'marutisuzuki-vitara-brezza-boot-space28.jpg', NULL, 1, 1, 1, NULL, NULL, 1, NULL, NULL, NULL, 1, NULL, '2024-05-10 07:04:35', '2024-06-05 05:30:33');
+(8, 'Maruti Suzuki Vitara Brezza', 1, 'The new Vitara Brezza is a well-rounded package that is feature-loaded and offers good drivability. And it is backed by Maruti’s vast service network, which ensures a peace of mind to customers. The petrol motor could have been more refined and offered more pep.', 600, 'Petrol', 2018, 5, 'marutisuzuki-vitara-brezza-right-front-three-quarter3.jpg', 'marutisuzuki-vitara-brezza-rear-view37.jpg', 'marutisuzuki-vitara-brezza-dashboard10.jpg', 'marutisuzuki-vitara-brezza-boot-space59.jpg', 'marutisuzuki-vitara-brezza-boot-space28.jpg', NULL, 1, 1, 1, NULL, NULL, 1, NULL, NULL, NULL, 1, NULL, '2024-05-10 07:04:35', '2024-06-05 05:30:33'),
+(9, 'totocar', 8, 'Tata offers 14 car models in India, including 4 cars in SUV category, 4 cars in Hatchback category, 4 cars in Compact SUV category, 2 cars in Compact Sedan category.', 2000, 'Diesel', 2016, 10, 'Fearles.jpg', 'Tat31.jpg', 'featured-img-2.jpg', 'car_755x430.png', 'post_200x200_1.jpg', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2025-01-13 05:09:23', NULL),
+(10, 'BDTCTK 1/32 Rolls-Royce Phantom Model Car', 9, 'Unerring interior appointments, limitless personalization options, plenty of hustle for its mass.', 100000, 'Petrol', 2024, 25, 'rollsimages.jpg', 'highres-rolls-royc.jpg', 'phantomheade.jpg', 'UF1000,1000_QL80_.jpg', 'car_755x430.png', 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, '2025-01-13 05:55:25', NULL);
 
 --
 -- Indexes for dumped tables
@@ -288,12 +292,6 @@ INSERT INTO `tblvehicles` (`id`, `VehiclesTitle`, `VehiclesBrand`, `VehiclesOver
 --
 ALTER TABLE `admin`
   ADD PRIMARY KEY (`id`);
-
---
--- Indexes for table `driver`
---
-ALTER TABLE `driver`
-  ADD PRIMARY KEY (`driver_id`);
 
 --
 -- Indexes for table `tblbooking`
@@ -358,13 +356,7 @@ ALTER TABLE `tblvehicles`
 -- AUTO_INCREMENT for table `admin`
 --
 ALTER TABLE `admin`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
-
---
--- AUTO_INCREMENT for table `driver`
---
-ALTER TABLE `driver`
-  MODIFY `driver_id` int(15) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `tblbooking`
@@ -376,7 +368,7 @@ ALTER TABLE `tblbooking`
 -- AUTO_INCREMENT for table `tblbrands`
 --
 ALTER TABLE `tblbrands`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- AUTO_INCREMENT for table `tblcontactusinfo`
@@ -400,25 +392,25 @@ ALTER TABLE `tblpages`
 -- AUTO_INCREMENT for table `tblsubscribers`
 --
 ALTER TABLE `tblsubscribers`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT for table `tbltestimonial`
 --
 ALTER TABLE `tbltestimonial`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `tblusers`
 --
 ALTER TABLE `tblusers`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `tblvehicles`
 --
 ALTER TABLE `tblvehicles`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
